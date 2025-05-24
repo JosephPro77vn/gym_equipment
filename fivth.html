@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="HJ SPORTS - YIWU HUIJUN SPORTS OF CHINA" data-zh="HJ体育 - 义乌汇骏体育用品有限公司">HJ SPORTS - YIWU HUIJUN SPORTS OF CHINA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for the body and font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* A light grey background for contrast */
+        }
+
+        /* Hero banner styling */
+        .hero-banner {
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out; /* Smooth transition for background image change */
+            height: 90px; /* Adjust as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative; /* For overlay if needed */
+        }
+        .hero-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); /* Optional dark overlay for better text readability */
+        }
+        .hero-content {
+            position: relative; /* To be above the overlay */
+            z-index: 10;
+            text-align: center;
+            color: white; /* Adjust text color as needed */
+        }
+        .hero-content h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .hero-content p {
+            font-size: 1rem;
+        }
+
+        /* Navigation link base styles */
+        .nav-link {
+            
+            padding-left: 120px;
+            @apply px-4 py-2 text-sm font-medium text-white rounded-md transition-colors duration-200;
+        }
+
+        /* Hover state for navigation links */
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly lighter on hover */
+        }
+
+        /* Sidebar link styles */
+        .sidebar-link {
+            @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 rounded-md;
+        }
+
+        /* Card component styling (used for sections like Products, About Us, Contact Us) */
+        .card {
+            @apply bg-white p-4 rounded-lg shadow-md;
+        }
+
+        /* General button styling */
+        .btn {
+            @apply px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition-colors;
+        }
+
+        /* Custom styles for specific elements from the image */
+        .logo-text {
+            font-size: 1.75rem; /* Approximation from image */
+            font-weight: bold;
+        }
+
+        .logo-hj {
+            color: #E70012; /* Red color from the image */
+        }
+
+        .logo-sports {
+            color: #333; /* Dark color for 'SPORTS' */
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        /* Main navigation bar background color from the image */
+        .main-nav {
+            background-color: #008080; /* Dark teal/green color from image */
+        }
+
+        /* Add separation to nav items */
+        .main-nav ul li:not(:last-child) .nav-link {
+            border-right: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border for separation */
+            padding-right: 1rem; /* Add padding to the right of the border */
+            margin-right: 0.5rem; /* Space after the border */
+        }
+        /* Adjust padding for the last item if needed to align */
+        .main-nav ul li:last-child .nav-link {
+             padding-right: 1rem;
+        }
+
+
+        /* Hero text box styling */
+        .hero-text-bg {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for text */
+            border: 2px solid #0EA5E9; /* Blue border */
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 500px; /* Limit width of text box */
+        }
+
+        .hero-text-bg h1 {
+            color: #333;
+            font-weight: bold;
+            font-size: 1.5rem; /* Adjust as needed */
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text-bg p {
+            color: #555;
+            font-size: 0.9rem; /* Adjust as needed */
+        }
+
+        /* Message Box Styling */
+        .message-box-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Ensure it's on top */
+        }
+
+        .message-box-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .message-box-content button {
+            margin-top: 15px;
+        }
+
+        /* Product Card Styling */
+        .product-card {
+            @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl;
+            transform: scale(1); /* Default scale */
+            transition: transform 0.25s ease-in-out; /* Smooth transition for scale */
+            cursor: pointer; /* Indicate it's clickable */
+        }
+
+        .product-card:active { /* When pressed */
+            transform: scale(3); /* Make it slightly bigger when pressed */
+        }
+        .product-card:hover { /* When hovered */
+            transform: scale(1.5); /* Make it slightly bigger when hovered */
+        }
+
+        .product-card img {
+            @apply w-full h-48 object-cover;
+        }
+
+        .product-card-content {
+            @apply p-4;
+        }
+
+        .product-card-title {
+            @apply font-semibold text-lg mb-1 text-gray-800;
+        }
+
+        .product-card-price {
+            @apply text-sky-600 font-bold text-xl mt-2;
+        }
+
+        /* Language button specific styling */
+        .lang-button {
+            @apply px-3 py-1 text-sm font-medium rounded-md transition-colors duration-200;
+        }
+
+        .lang-button-en {
+            @apply text-sky-600 border border-sky-600 hover:bg-sky-50;
+        }
+
+        .lang-button-zh {
+            @apply text-gray-700 bg-gray-200 hover:bg-gray-300;
+            border-top-right-radius: 0.375rem; /* Tailwind 'rounded-md' */
+            border-bottom-right-radius: 0.375rem; /* Tailwind 'rounded-md' */
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .lang-button.active {
+            @apply bg-gray-200 text-gray-700;
+        }
+
+        /* Specific style for the active Chinese button as per image */
+        .lang-button-zh.active {
+            @apply bg-gray-200 text-gray-700;
+        }
+
+        /* Specific style for the active English button */
+        .lang-button-en.active {
+            @apply bg-sky-600 text-white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="images/logo.jpg" alt="HJ Sports Logo" class="h-10">
+                <div>
+                    <h1 class="logo-text"><span class="logo-hj">HJ</span> <span class="logo-sports">SPORTS</span></h1>
+                    <p class="tagline" data-en="YIWU HUIJUN SPORTS OF CHINA" data-zh="义乌汇骏体育用品有限公司">YIWU HUIJUN SPORTS OF CHINA</p>
+                    <p class="tagline" data-en="CHINA SPORTING GOODS EXPORT BASE" data-zh="中国体育用品出口基地">CHINA SPORTING GOODS EXPORT BASE</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                <img src="https://placehold.co/60x60/CCCCCC/333333?text=QR" alt="QR Code" class="h-12 w-12 rounded">
+                <button id="langEnBtn" class="lang-button lang-button-en">English</button>
+                <button id="langZhBtn" class="lang-button lang-button-zh">中文版</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container mx-auto px-4">
+            <ul class="flex flex-wrap justify-center sm:justify-start py-2">
+                <li><a href="#" id="navHome" class="nav-link" data-en="Home" data-zh="首页">Home</a></li>
+                <li><a href="#" id="navAbout" class="nav-link" data-en="About Us" data-zh="关于我们">About Us</a></li>
+                <li><a href="#" id="navCorpShow" class="nav-link" data-en="Corp. Show" data-zh="公司展示">Corp. Show</a></li>
+                <li><a href="#" id="navProducts" class="nav-link" data-en="Products" data-zh="产品中心">Products</a></li>
+                <li><a href="#" id="navNews" class="nav-link" data-en="News" data-zh="新闻动态">News</a></li>
+                <li><a href="#" id="navMember" class="nav-link" data-en="" data-zh="会员中心"></a></li>
+                <li><a href="#" id="navContact" class="nav-link" data-en="" data-zh="联系我们"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero-banner h-64 sm:h-80 md:h-96 flex items-center justify-center relative">
+        <!-- <div class="hero-text-bg relative z-10">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold" data-en="Sports Equipment" data-zh="体育用品">体育用品</h1>
+            <p class="mt-2 text-sm sm:text-md" data-en="Professional basketball stands, table tennis tables" data-zh="专业篮球架 乒乓球桌">专业篮球架 乒乓球桌</p>
+            <p class="text-xs sm:text-sm" data-en="Sports equipment and fitness trail series products" data-zh="体育器材及健身路径系列产品">体育器材及健身路径系列产品</p>
+        </div> -->
+    </section>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-6">
+
+            <aside class="w-full lg:w-1/4 space-y-6">
+                <div class="card">
+                    <h3 class="font-semibold text-lg mb-3 border-b pb-2 text-sky-700" data-en="Products" data-zh="产品中心">Products</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#" class="sidebar-link" data-category="Barbell & Dumbbell" data-en="Barbell & Dumbbell" data-zh="杠铃哑铃">Barbell & Dumbbell</a></li>
+                        <li><a href="#" class="sidebar-link" data-category="Home fitness equipment" data-en="Home fitness equipment" data-zh="家用健身器材">Home fitness equipment</a></li>
+                        <li><a href="#" class="sidebar-link" data-category="Commercial fitness Equipment" data-en="Commercial fitness Equipment" data-zh="商用健身器材">Commercial fitness Equipment</a></li>
+                        <li><a href="#" class="sidebar-link" data-category="Treadmill" data-en="Treadmill" data-zh="跑步机">Treadmill</a></li>
+                        <li><a href="#" class="sidebar-link" data-category="Cycling Machines" data-en="Cycling Machines" data-zh="动感单车">Cycling Machines</a></li>
+                        <li><a href="#" class="sidebar-link" data-category="Massage Apparatus" data-en="Massage Apparatus" data-zh="按摩器材">Massage Apparatus</a></li>
+                        <li><a href="#" class="sidebar-link" data-category="Yoga Series" data-en="Yoga Series" data-zh="瑜伽系列">Yoga Series</a></li>
+                        <li><a href="#" class="sidebar-link" data-category="Martial Arts Equipment" data-en="Martial Arts Equipment" data-zh="武术器材">Martial Arts Equipment</a></li>
+                        <li><a href="#" class="sidebar-link" data-category="Sports & Outdoor Equipment" data-en="Sports & Outdoor Equipment" data-zh="运动户外器材">Sports & Outdoor Equipment</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="font-semibold text-lg mb-3 border-b pb-2 text-sky-700" data-en="About Us" data-zh="关于我们">About Us</h3>
+                    <!-- <ul class="space-y-1">
+                        <li><a href="#" class="sidebar-link" data-en="About Us" data-zh="关于我们">About Us</a></li>
+                        <li><a href="#" class="sidebar-link" data-en="Culture" data-zh="企业文化">Culture</a></li>
+                        <li><a href="#" class="sidebar-link" data-en="Corp. Show" data-zh="公司展示">Corp. Show</a></li>
+                        <li><a href="#" class="sidebar-link" data-en="News" data-zh="新闻动态">News</a></li>
+                        <li><a href="#" class="sidebar-link" data-en="Member" data-zh="会员中心">Member</a></li>
+                    </ul> -->
+                </div>
+            </aside>
+
+            <main id="mainContent" class="w-full lg:w-1/2 card">
+                <h2 class="font-semibold text-xl mb-4 text-sky-700" data-en="Welcome to HJ Sports" data-zh="欢迎来到HJ体育">Welcome to HJ Sports</h2>
+                <p class="text-gray-600 mb-4" data-en="Established in October of 2002, Huijun Sports has been in the business for 15 years integrated with commerce, industry and trade. We apply scaled operation and standard management. The headquarter is located in Yiwu International Business Center with 7 direct-sale stores in the Yiwu International Trade City, Yiwu Huijun Sports Co., Ltd, Zhejiang Huijun Import & Export Co., Ltd, Yiwu Jiandao Fitness Facilities Co., Ltd and Northern China Operation Center. The joint production plants are located in Zhejiang, Fujian, Hebei and Shandong provinces. " data-zh="这是主要内容区域。产品详情、文章或其他信息将在此处显示。目前，它是一个占位符。我们稍后可以用动态内容填充此部分。">
+                    Established in October of 2002, Huijun Sports has been in the business for 15 years integrated with commerce, industry and trade. We apply scaled operation and standard management. 
+                    The headquarter is located in Yiwu International Business Center with 7 direct-sale stores in the Yiwu International Trade City, 
+                    Yiwu Huijun Sports Co., Ltd, Zhejiang Huijun Import & Export Co., Ltd, Yiwu Jiandao Fitness Facilities Co., 
+                    Ltd and Northern China Operation Center. The joint production plants are located in Zhejiang, Fujian, Hebei and Shandong provinces.
+                </p>
+                <img src="images/contact.jpg" alt="Main Content Placeholder" class="rounded-md w-full h-auto">
+                <div class="mt-6">
+                    <!-- <button id="interactiveButton" class="btn" data-en="Click Me for a Message" data-zh="点击我获取消息"></button> -->
+                </div>
+            </main>
+
+            <div id="productsContent" class="w-full lg:w-1/2 card hidden">
+                <h2 class="font-semibold text-xl mb-4 text-sky-700" data-en="Our Products" data-zh="我们的产品">Our Products</h2>
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    </div>
+            </div>
+
+            <div id="aboutUsContent" class="w-full lg:w-1/2 card hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-semibold text-xl text-sky-700" data-en="ABOUT US" data-zh="关于我们">ABOUT US</h2>
+                    <div class="text-right text-sm text-gray-600">
+                        <p data-en="Open the WeChat stijlan666" data-zh="打开微信 stijlan666">Open the WeChat stijlan666</p>
+                        <p data-en="Or the" data-zh="或">Or the</p>
+                        <img src="https://placehold.co/80x80/CCCCCC/333333?text=QR" alt="WeChat QR Code" class="inline-block mt-2 rounded" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4 mb-4">
+                    <div class="md:w-2/3">
+                        <h3 class="font-semibold text-lg mb-2" data-en="About Us" data-zh="关于我们">About Us</h3>
+                        <p class="text-gray-600 mb-4" data-en="Established in October of 2002, Huijun Sports has been in the business for 15 years Integrated with commerce, Industry and trade. We apply scaled operation and standard management. The headquarter is located in Yiwu International Business Center with 7 direct-sale stores in the Yiwu International Trade City, Yiwu Huijun Sports Co., Ltd, Zhejiang Huijun Import & Export Co., Ltd, Yiwu Jiandao Fitness Facilities Co., Ltd and Northern China Operation Center. The joint production plants are located in Zhejiang, Fujian, Hebei and Shandong provinces." data-zh="汇骏体育成立于2002年10月，至今已有15年的历史，集商业、工业和贸易于一体。我们实行规模化运营和标准化管理。总部位于义乌国际商务中心，在义乌国际商贸城拥有7家直营店，包括义乌汇骏体育用品有限公司、浙江汇骏进出口有限公司、义乌健道健身器材有限公司和华北运营中心。联合生产工厂位于浙江、福建、河北和山东省。">
+                            Established in October of 2002, Huijun Sports has been in the business for 15 years Integrated with commerce, Industry and trade. We apply scaled operation and standard management. The headquarter is located in Yiwu International Business Center with 7 direct-sale stores in the Yiwu International Trade City, Yiwu Huijun Sports Co., Ltd, Zhejiang Huijun Import & Export Co., Ltd, Yiwu Jiandao Fitness Facilities Co., Ltd and Northern China Operation Center. The joint production plants are located in Zhejiang, Fujian, Hebei and Shandong provinces.
+                        </p>
+                        <p class="font-semibold text-gray-700 mb-2" data-en="China Sporting Goods Export Base" data-zh="中国体育用品出口基地">China Sporting Goods Export Base</p>
+                        <p class="font-semibold text-gray-700" data-en="China No.1 Sporting Goods Supplier" data-zh="中国第一体育用品供应商">China No.1 Sporting Goods Supplier</p>
+                    </div>
+                    <div class="md:w-1/3">
+                        <img src="images/building.jpg" alt="Building" class="rounded-md w-full h-auto object-cover mb-4" />
+                    </div>
+                </div>
+                <img src="images/contact.jpg" alt="Chinese Characters" class="rounded-md w-full h-auto object-cover" />
+            </div>
+
+            <div id="corpShowContent" class="w-full lg:w-1/2 card hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-semibold text-xl text-sky-700" data-en="CORP. SHOW" data-zh="公司展示">CORP. SHOW</h2>
+                    <div class="text-right text-sm text-gray-600">
+                        <p data-en="Open the WeChat stijlan666" data-zh="打开微信 stijlan666">Open the WeChat stijlan666</p>
+                        <p data-en="Or the" data-zh="或">Or the</p>
+                        <img src="https://placehold.co/80x80/CCCCCC/333333?text=QR" alt="WeChat QR Code" class="inline-block mt-2 rounded" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="text-center">
+                        <img src="images/corpshow1.jpg" alt="Yiwu Oume Business Center Exterior" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="YTWU Headquarter: YIWU OUME BUSINESS CENTER 17F" data-zh="义乌总部：义乌欧美商务中心17楼">YTWU Headquarter: YIWU OUME BUSINESS CENTER 17F</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="images/corpshow2.jpg" alt="Office Interior 1" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="Headqueter: YIWU OUME BUSINESS CENTER 17F" data-zh="总部：义乌欧美商务中心17楼">Headqueter: YIWU OUME BUSINESS CENTER 17F</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="images/corpshow3.jpg" alt="Office Interior 2" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="YTWU Headquarter: YIWU OUME BUSINESS CENTER 17F" data-zh="义乌总部：义乌欧美商务中心17楼">YTWU Headquarter: YIWU OUME BUSINESS CENTER 17F</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="images/corpshow4.jpg" alt="Interior Decoration" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="Show Rooms" data-zh="义乌总部：义乌欧美商务中心17楼">Show Rooms</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="images/corpshow5.jpg" alt="Gym Equipment 1" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="CHINA SPORTING GOODS EXPORT BASE" data-zh="中国体育用品出口基地">CHINA SPORTING GOODS EXPORT BASE</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="images/corpshow6.jpg" alt="Gym Equipment 2" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="CHINA SPORTING GOODS EXPORT BASE" data-zh="中国体育用品出口基地">CHINA SPORTING GOODS EXPORT BASE</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="images/corpshow7.jpg" alt="Gym Equipment 3" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="Zhejiang Yitijian Haikou South China operation center" data-zh="中国体育用品出口基地">Zhejiang Yitijian Haikou South China operation center</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="images/corpshow8.jpg" alt="Gym Equipment 4" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="Zhejiang Yitijian Haikou South China operation center" data-zh="中国体育用品出口基地">Zhejiang Yitijian Haikou South China operation center</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="images/corpshow9.jpg" alt="Gym Equipment 5" class="rounded-md w-full h-auto object-cover mb-2" />
+                        <p class="text-xs text-gray-600" data-en="Show Rooms" data-zh="中国体育用品出口基地">Show Rooms</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="newsContent" class="w-full lg:w-1/2 card hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-semibold text-xl text-sky-700" data-en="NEWS" data-zh="新闻动态">NEWS</h2>
+                    <div class="text-right text-sm text-gray-600">
+                        <p data-en="Open the WeChat stijlan666" data-zh="打开微信 stijlan666">Open the WeChat stijlan666</p>
+                        <p data-en="Or the" data-zh="或">Or the</p>
+                        <img src="https://placehold.co/80x80/CCCCCC/333333?text=QR" alt="WeChat QR Code" class="inline-block mt-2 rounded" />
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="border-b pb-3">
+                        <h3 class="font-semibold text-lg text-gray-800" data-en="Warmly celebrate the company's website revision and launch!" data-zh="热烈庆祝公司网站改版上线！">Warmly celebrate the company's website revision and launch!</h3>
+                        <p class="text-sm text-gray-500" data-en="Release time: 2017-09-28" data-zh="发布时间：2017-09-28">Release time: 2017-09-28</p>
+                        <p class="text-gray-600 mt-2" data-en="After careful planning and preparation, the company's website has been successfully revised and launched! The new website has a clearer structure, richer content, and more beautiful design, aiming to provide customers with a better browsing experience and more comprehensive product information. Welcome new and old customers to visit!" data-zh="经过精心策划和准备，公司网站已成功改版上线！新网站结构更清晰，内容更丰富，设计更美观，旨在为客户提供更好的浏览体验和更全面的产品信息。欢迎新老客户访问！">After careful planning and preparation, the company's website has been successfully revised and launched! The new website has a clearer structure, richer content, and more beautiful design, aiming to provide customers with a better browsing experience and more comprehensive product information. Welcome new and old customers to visit!</p>
+                    </div>
+                    <div class="border-b pb-3">
+                        <h3 class="font-semibold text-lg text-gray-800" data-en="Warmly celebrate the company's website revision and launch!" data-zh="热烈庆祝公司网站改版上线！">Warmly celebrate the company's website revision and launch!</h3>
+                        <p class="text-sm text-gray-500" data-en="Release time: 2017-09-28" data-zh="发布时间：2017-09-28">Release time: 2017-09-28</p>
+                        <p class="text-gray-600 mt-2" data-en="After careful planning and preparation, the company's website has been successfully revised and launched! The new website has a clearer structure, richer content, and more beautiful design, aiming to provide customers with a better browsing experience and more comprehensive product information. Welcome new and old customers to visit!" data-zh="经过精心策划和准备，公司网站已成功改版上线！新网站结构更清晰，内容更丰富，设计更美观，旨在为客户提供更好的浏览体验和更全面的产品信息。欢迎新老客户访问！">After careful planning and preparation, the company's website has been successfully revised and launched! The new website has a clearer structure, richer content, and more beautiful design, aiming to provide customers with a better browsing experience and more comprehensive product information. Welcome new and old customers to visit!</p>
+                    </div>
+                </div>
+            </div>
+
+            <aside id = "contactUsSection" class="w-full lg:w-1/4 space-y-6">
+                <div class="card">
+                    <h3 class="font-semibold text-lg mb-3 border-b pb-2 text-sky-700" data-en="Contact Us" data-zh="联系我们">Contact Us</h3>
+                    <div class="text-xs text-gray-600 space-y-1">
+                        <p data-en="Sales Department: No 28621,28622,28624,3nd Street, 4th floor, 55 Gate, Yiwu International Trade Market, China" data-zh="销售部: 中国义乌国际商贸城五区55号门4楼3街28621,28622,28624号"><strong>Sales Department:</strong> No 28621,28622,28624,3nd Street, 4th floor, 55 Gate, Yiwu International Trade Market, China</p>
+                        <p data-en="Franchise Stores: No. 28786, 28786-1, 28793, 3rd District Yiwu InternationalTrade Market, China" data-zh="加盟店: 中国义乌国际商贸城三区28786, 28786-1, 28793号"><strong>Franchise Stores:</strong> No. 28786, 28786-1, 28793, 3rd District Yiwu InternationalTrade Market, China</p>
+                        <p data-en="TEL: 0086-579-85330299 85161029" data-zh="电话: 0086-579-85330299 85161029"><strong>TEL:</strong> 0086-579-85330299 85161029</p>
+                        <p data-en="Email: huijunsport@163.com" data-zh="邮箱: huijunsport@163.com"><strong>Email:</strong> huijunsport@163.com</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="font-semibold text-lg mb-3 border-b pb-2 text-sky-700" data-en="Huijun Online" data-zh="汇骏在线">Huijun Online</h3>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-blue-500 text-white px-3 py-1 rounded-md text-xs hover:bg-blue-600">QQ Online 1</a>
+                        <a href="#" class="bg-blue-500 text-white px-3 py-1 rounded-md text-xs hover:bg-blue-600">QQ Online 2</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="font-semibold text-lg mb-3 border-b pb-2 text-sky-700" data-en="Products Search" data-zh="产品搜索">Products Search</h3>
+                    <form id="productSearchForm">
+                        <input type="text" placeholder="Product Name or Number" class="w-full p-2 border border-gray-300 rounded-md mb-2 text-sm" data-en-placeholder="Product Name or Number" data-zh-placeholder="产品名称或型号">
+                        <button type="submit" class="btn w-full text-sm" data-en="Search" data-zh="搜索">Search</button>
+                    </form>
+                    <img src="https://placehold.co/150x150/CCCCCC/333333?text=Search+QR" alt="Search QR Code" class="mx-auto mt-3 h-24 w-24 rounded">
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p class="text-sm" data-en="&copy; <span id='currentYear'></span> YIWU HUIJUN SPORTS OF CHINA. All Rights Reserved." data-zh="&copy; <span id='currentYear'></span> 义乌汇骏体育用品有限公司. 版权所有。">&copy; <span id="currentYear"></span> YIWU HUIJUN SPORTS OF CHINA. All Rights Reserved.</p>
+            <!-- <p class="text-xs mt-1" data-en="Website template by Joseph" data-zh="Joseph">Website template by Joseph</p> -->
+        </div>
+    </footer>
+
+    <div id="messageBoxOverlay" class="message-box-overlay hidden">
+        <div class="message-box-content">
+            <p id="messageBoxText"></p>
+            <button id="messageBoxClose" class="btn" data-en="Close" data-zh="关闭">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Product data
+        const productsData = [
+            { itemNo: "HJ-B2389", photo: "images/1748081596476.jpg", description_en: "Commercial Treadmill", description_zh: "商用跑步机 （蓝牙连接）", price: 5600.0, unit: "pcs" },
+            { itemNo: "HJ-B556", photo: "images/1748081634443.jpg", description_en: "commerical spinning bike", description_zh: "商用健身车", price: 1800.0, unit: "pcs" },
+            { itemNo: "HJ-B288", photo: "images/1748081653596.jpg", description_en: "Elliptical Machine", description_zh: "自发电高端椭圆机", price: 3300.0, unit: "pcs" },
+            { itemNo: "HJ-B5712", photo: "images/1748081671422.jpg", description_en: "Comprehensive Training for Eight people", description_zh: "商用综合训练器八人站", price: 16500.0, unit: "pcs" },
+            { itemNo: "HJ-A077", photo: "images/1748081708881.jpg", description_en: "Commercial Dumbbell Rack", description_zh: "商用十付装哑铃架", price: 950.0, unit: "pcs" },
+            { itemNo: "HJ-A056-2.5KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 2.5KG", description_zh: "高档橡胶哑铃2.5KG", price: 24.25, unit: "pcs" },
+            { itemNo: "HJ-A056-5KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 5KG", description_zh: "高档橡胶哑铃5KG", price: 48.25, unit: "pcs" },
+            { itemNo: "HJ-A056-7.5KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 7.5KG", description_zh: "高档橡胶哑铃7.5KG", price: 72.75, unit: "pcs" },
+            { itemNo: "HJ-A056-10KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 10KG", description_zh: "高档橡胶哑铃10KG", price:97, unit: "pcs" },
+            { itemNo: "HJ-A056-12.5KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 12.5KG", description_zh: "高档橡胶哑铃12.5KG", price: 121.25, unit: "pcs" },
+            { itemNo: "HJ-A056-15KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 15KG", description_zh: "高档橡胶哑铃15KG", price: 145.5, unit: "pcs" },
+            { itemNo: "HJ-A056-17.5KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 17.5KG", description_zh: "高档橡胶哑铃17.5KG", price: 169.75, unit: "pcs" },
+            { itemNo: "HJ-A056-20KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 20KG", description_zh: "高档橡胶哑铃20KG", price: 194, unit: "pcs" },
+            { itemNo: "HJ-A056-22.5KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 22.5KG", description_zh: "高档橡胶哑铃22.5KG", price: 218.25, unit: "pcs" },
+            { itemNo: "HJ-A056-25KG", photo: "images/1748081729150.jpg", description_en: "Dumbbells for gym 25KG", description_zh: "高档橡胶哑铃25KG", price: 242.5, unit: "pcs" },
+            { itemNo: "HJ-00205-10KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-10KG", description_zh: "小杠铃 10KG", price: 97.0, unit: "pcs" },
+            { itemNo: "HJ-00205-15KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-15KG", description_zh: "小杠铃 15KG", price: 145.5, unit: "pcs" },
+            { itemNo: "HJ-00205-20KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-20KG", description_zh: "小杠铃 20KG", price: 194.0, unit: "pcs" },
+            { itemNo: "HJ-00205-25KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-25KG", description_zh: "小杠铃 25KG", price: 242.5, unit: "pcs" },
+            { itemNo: "HJ-00205-30KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-30KG", description_zh: "小杠铃 30KG", price: 291.0, unit: "pcs" },
+            { itemNo: "HJ-00205-35KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-35KG", description_zh: "小杠铃 35KG", price: 339.5, unit: "pcs" },
+            { itemNo: "HJ-00205-40KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-40KG", description_zh: "小杠铃 40KG", price: 388.0, unit: "pcs" },
+            { itemNo: "HJ-00205-45KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-45KG", description_zh: "小杠铃 45KG", price: 436.5, unit: "pcs" },
+            { itemNo: "HJ-00205-50KG", photo: "images/1748081752373.jpg", description_en: "Fixed Barbell-50KG", description_zh: "小杠铃 50KG", price: 485.0, unit: "pcs" },
+            { itemNo: "HJ-A194", photo: "images/1748081777037.jpg", description_en: "Barbell Rack", description_zh: "固定小杠铃杠铃架", price: 1100.0, unit: "pcs" },
+            { itemNo: "HJ-B8827", photo: "images/1748081821489.jpg", description_en: "Leg Extension", description_zh: "坐式伸腿 /大腿伸展训练器", price: 4700.0, unit: "pcs" },
+            { itemNo: "HJ-B8826", photo: "images/1748081834175.jpg", description_en: "Shoulder Press", description_zh: "坐式肩部推举练习器", price: 4700.0, unit: "pcs" },
+            { itemNo: "HJ-B8820", photo: "images/1748081863225.jpg", description_en: "Chest Press", description_zh: "坐式双向推胸练习器", price: 4700.0, unit: "pcs" },
+            { itemNo: "HJ-B8838", photo: "images/1748081883094.jpg", description_en: "Pearl Delt /Pec Fly", description_zh: "直臂夹胸/高位蝴蝶机训练器", price: 4700.0, unit: "pcs" },
+            { itemNo: "HJ-B8806", photo: "images/1748081899127.jpg", description_en: "Low Pull Row Machine", description_zh: "低拉划船器", price: 4700.0, unit: "pcs" },
+            { itemNo: "HJ-A095", photo: "images/1748081916482.jpg", description_en: "2.2M Olympic Bar with Spring Collars", description_zh: "奥林匹克大杆（配卡簧）", price: 139.0, unit: "pcs" },
+            { itemNo: "HJ-B285", photo: "images/1748081934262.jpg", description_en: "Upright Bike", description_zh: "自发电高端立式车", price: 2900.0, unit: "pcs" },
+            { itemNo: "HJ-B266C", photo: "images/1748081951755.jpg", description_en: "Stepper C", description_zh: "瑜伽踏板C", price: 72.0, unit: "pcs" },
+            { itemNo: "HJ-B266B", photo: "images/1748081969319.jpg", description_en: "Stepper B", description_zh: "瑜伽踏板B", price: 42.0, unit: "pcs" },
+            { itemNo: "HJ-B231", photo: "images/1748081991112.jpg", description_en: "Commercial Stair climber", description_zh: "商用登山机", price: 4300.0, unit: "pcs" },
+            { itemNo: "HJ-B8120", photo: "images/1748082006012.jpg", description_en: "Massage Chair", description_zh: "家用多功能按摩椅", price: 2800.0, unit: "pcs" },
+            { itemNo: "HJ-00224-6MM", photo: "images/1748082021804.jpg", description_en: "Wirerope 6mm", description_zh: "国产钢丝绳6MM", price: 4.0, unit: "m" },
+            { itemNo: "HJ-B5666", photo: "images/1748082077830.jpg", description_en: "Smith Machine", description_zh: "史密斯机", price: 4500.0, unit: "pcs" },
+            { itemNo: "HJ-00291-2.5KG", photo: "images/1748082091220.jpg", description_en: "Hand Grasp Rubber Coated Weight Plates-2.5kg", description_zh: "三孔手抓黑色橡胶铃片2.5KG", price: 488.2, unit: "pcs" },
+            { itemNo: "HJ-00291-5KG", photo: "images/1748082091220.jpg", description_en: "Hand Grasp Rubber Coated Weight Plates-5KG/10LB", description_zh: "三孔手抓黑色橡胶铃片5kg/10LB", price: 488.2, unit: "pcs" },
+            { itemNo: "HJ-00291-10KG", photo: "images/1748082109444.jpg", description_en: "Hand Grasp Rubber Coated Weight Plates-10KG/25LB", description_zh: "三孔手抓黑色橡胶铃片10kg/25LB", price: 488.2, unit: "pcs" },
+            { itemNo: "HJ-00291-15KG", photo: "images/1748082109444.jpg", description_en: "Hand Grasp Rubber Coated Weight Plates-15KG/35LB", description_zh: "三孔手抓黑色橡胶铃片15kg/35LB", price: 488.2, unit: "pcs" },
+            { itemNo: "HJ-00291-20KG", photo: "images/1748082109444.jpg", description_en: "Hand Grasp Rubber Coated Weight Plates-20KG/45LB", description_zh: "三孔手抓黑色橡胶铃片20kg/45LB", price: 488.2, unit: "pcs" },
+            { itemNo: "HJ-00291-25KG", photo: "images/1748082109444.jpg", description_en: "Hand Grasp Rubber Coated Weight Plates-25KG", description_zh: "三孔手抓黑色橡胶铃片25kg", price: 488.2, unit: "pcs" },
+            { itemNo: "HJ-B752", photo: "images/1748082124061.jpg", description_en: "Rowing machine", description_zh: "豪华折叠商用划船器", price: 1200.0, unit: "pcs" }
+        ];
+
+        // Define product categories and their keywords for filtering
+        const productCategories = {
+            "Barbell & Dumbbell": {
+                en: "Barbell & Dumbbell",
+                zh: "杠铃哑铃",
+                keywords: ["Barbell", "Dumbbell", "Weight Plates", "Rack", "Olympic Bar"]
+            },
+            "Home fitness equipment": {
+                en: "Home fitness equipment",
+                zh: "家用健身器材",
+                keywords: ["Treadmill", "Cycling Machines", "Elliptical Machine", "Rowing machine", "Upright Bike", "Massage Chair", "Stepper"]
+            },
+            "Commercial fitness Equipment": {
+                en: "Commercial fitness Equipment",
+                zh: "商用健身器材",
+                keywords: ["Commercial Treadmill", "commerical spinning bike", "Comprehensive Training", "Commercial Dumbbell Rack", "Leg Extension", "Shoulder Press", "Chest Press", "Pearl Delt", "Pec Fly", "Low Pull Row Machine", "Smith Machine", "Stair climber"]
+            },
+            "Treadmill": {
+                en: "Treadmill",
+                zh: "跑步机",
+                keywords: ["Treadmill"]
+            },
+            "Cycling Machines": {
+                en: "Cycling Machines",
+                zh: "动感单车",
+                keywords: ["Cycling Machines", "spinning bike", "Upright Bike"]
+            },
+            "Massage Apparatus": {
+                en: "Massage Apparatus",
+                zh: "按摩器材",
+                keywords: ["Massage Chair", "Massage Apparatus"]
+            },
+            "Yoga Series": {
+                en: "Yoga Series",
+                zh: "瑜伽系列",
+                keywords: ["Yoga", "Stepper"]
+            },
+            "Martial Arts Equipment": {
+                en: "Martial Arts Equipment",
+                zh: "武术器材",
+                keywords: [] // No specific keywords from the provided data
+            },
+            "Sports & Outdoor Equipment": {
+                en: "Sports & Outdoor Equipment",
+                zh: "运动户外器材",
+                keywords: ["Wirerope", "Olympic Bar"]
+            }
+        };
+
+        // Get main content, products content, about us content, and corp show content elements
+        const mainContent = document.getElementById('mainContent');
+        const productsContent = document.getElementById('productsContent');
+        const aboutUsContent = document.getElementById('aboutUsContent');
+        const corpShowContent = document.getElementById('corpShowContent');
+        const newsContent = document.getElementById('newsContent'); // New element for News
+        const productGrid = document.getElementById('productGrid');
+        const contactUsSection = document.getElementById('contactUsSection')
+
+        // Get navigation links
+        const navHome = document.getElementById('navHome');
+        const navAbout = document.getElementById('navAbout');
+        const navCorpShow = document.getElementById('navCorpShow');
+        const navProducts = document.getElementById('navProducts');
+        const navNews = document.getElementById('navNews'); // New element for News
+        const navContact = document.getElementById('navContact')
+
+        // Interactive button functionality
+        const interactiveButton = document.getElementById('interactiveButton');
+        const messageBoxOverlay = document.getElementById('messageBoxOverlay');
+        const messageBoxText = document.getElementById('messageBoxText');
+        const messageBoxClose = document.getElementById('messageBoxClose');
+
+        let currentPage = 'home'; // Track current page state
+
+        /**
+         * Displays a message box with the given message.
+         * @param {string} message - The message to display.
+         */
+        function showMessage(message) {
+            messageBoxText.textContent = message;
+            messageBoxOverlay.classList.remove('hidden');
+        }
+
+        /**
+         * Hides the message box.
+         */
+        function hideMessage() {
+            messageBoxOverlay.classList.add('hidden');
+        }
+
+        if (interactiveButton) {
+            interactiveButton.addEventListener('click', () => {
+                const currentLang = document.documentElement.lang;
+                const message = currentLang === 'en' ? 'Thanks for clicking! This is a JavaScript interaction.' : '感谢您的点击！这是一个JavaScript交互。';
+                showMessage(message);
+                console.log('Interactive button clicked!');
+            });
+        }
+
+        if (messageBoxClose) {
+            messageBoxClose.addEventListener('click', hideMessage);
+        }
+
+        // Close message box if overlay is clicked
+        if (messageBoxOverlay) {
+            messageBoxOverlay.addEventListener('click', (event) => {
+                if (event.target === messageBoxOverlay) {
+                    hideMessage();
+                }
+            });
+        }
+
+        // Product Search Form
+        const productSearchForm = document.getElementById('productSearchForm');
+        if (productSearchForm) {
+            productSearchForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent actual form submission
+                const searchTermInput = event.target.querySelector('input[type="text"]');
+                const searchTerm = searchTermInput.value;
+                const currentLang = document.documentElement.lang;
+
+                if (searchTerm) {
+                    const message = currentLang === 'en' ? `Searching for: "${searchTerm}" (Search functionality not implemented yet).` : `正在搜索: “${searchTerm}” (搜索功能尚未实现)。`;
+                    showMessage(message);
+                    console.log('Product search submitted for:', searchTerm);
+                } else {
+                    const message = currentLang === 'en' ? 'Please enter a search term.' : '请输入搜索词。';
+                    showMessage(message);
+                }
+                searchTermInput.value = ''; // Clear input
+            });
+        }
+
+        /**
+         * Filters products based on a given category and language.
+         * @param {string} category - The category name to filter by.
+         * @param {string} lang - The current language ('en' or 'zh').
+         * @returns {Array} - An array of filtered products.
+         */
+        function getProductsByCategory(category, lang) {
+            const categoryInfo = productCategories[category];
+            if (!categoryInfo) return [];
+
+            const keywords = categoryInfo.keywords.map(k => k.toLowerCase());
+
+            return productsData.filter(product => {
+                const description = lang === 'en' ? product.description_en : product.description_zh;
+                return keywords.some(keyword => description.toLowerCase().includes(keyword.toLowerCase()));
+            });
+        }
+
+        /**
+         * Renders product cards into the product grid.
+         * @param {string} lang - The current language ('en' or 'zh').
+         * @param {string} [categoryFilter] - Optional category to filter products by.
+         */
+        function renderProducts(lang, categoryFilter = null) {
+            productGrid.innerHTML = ''; // Clear existing products
+            let productsToRender = productsData;
+
+            if (categoryFilter) {
+                productsToRender = getProductsByCategory(categoryFilter, lang);
+            }
+
+            if (productsToRender.length === 0) {
+                const noProductsMessage = lang === 'en' ? "No products found in this category." : "此类别中没有找到产品。";
+                productGrid.innerHTML = `<p class="text-center text-gray-600 col-span-full">${noProductsMessage}</p>`;
+                return;
+            }
+
+            productsToRender.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+
+                const description = lang === 'en' ? product.description_en : product.description_zh;
+                const priceText = lang === 'en' ? `Price: ¥${product.price.toFixed(2)}` : `价格: ¥${product.price.toFixed(2)}`;
+                const itemNoText = lang === 'en' ? `Item No.: ${product.itemNo}` : `型号: ${product.itemNo}`;
+                const unitText = lang === 'en' ? `Unit: ${product.unit}` : `单位: ${product.unit}`;
+
+                productCard.innerHTML = `
+                    <img src="${product.photo}" alt="${product.description_en}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/CCCCCC/333333?text=No+Image';" class="w-full h-48 object-cover rounded-t-xl">
+                    <div class="product-card-content">
+                        <h4 class="product-card-title">${description}</h4>
+                        <p class="text-sm text-gray-500">${itemNoText}</p>
+                        <p class="product-card-price">${priceText}</p>
+                        <p class="text-sm text-gray-500">${unitText}</p>
+                    </div>
+                `;
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        /**
+         * Handles page navigation by showing/hiding content sections.
+         * @param {string} page - The page to navigate to ('home', 'products', 'about', 'corpShow', 'news').
+         * @param {string} [category] - Optional category for products page.
+         */
+        function navigateTo(page, category = null) {
+            // Hide all main content sections
+            mainContent.classList.add('hidden');
+            productsContent.classList.add('hidden');
+            aboutUsContent.classList.add('hidden');
+            corpShowContent.classList.add('hidden');
+            newsContent.classList.add('hidden'); // Hide new news content
+
+            // Show the requested page
+            switch (page) {
+                case 'home':
+                    mainContent.classList.remove('hidden');
+                    break;
+                case 'products':
+                    productsContent.classList.remove('hidden');
+                    renderProducts(document.documentElement.lang, category);
+                    break;
+                case 'about':
+                    aboutUsContent.classList.remove('hidden');
+                    break;
+                case 'corpShow':
+                    corpShowContent.classList.remove('hidden');
+                    break;
+                case 'news': // New case for News
+                    newsContent.classList.remove('hidden');
+                    break;
+                default:
+                    mainContent.classList.remove('hidden'); // Default to home
+            }
+            currentPage = page; // Update current page state
+        }
+
+        // Add event listeners to sidebar links
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = e.target.dataset.category;
+                navigateTo('products', category);
+            });
+        });
+
+        // Language switch button event listeners
+        document.getElementById('langEnBtn').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('langZhBtn').addEventListener('click', () => setLanguage('zh'));
+
+        // Navigation logic
+        navHome.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('home');
+        });
+
+        navAbout.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('about');
+        });
+
+        navCorpShow.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('corpShow');
+        });
+
+        navProducts.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('products'); // Render all products by default
+        });
+
+        navNews.addEventListener('click', (e) => { // Event listener for News nav link
+            e.preventDefault();
+            navigateTo('news');
+        });
+
+        // Other nav links (Member, Contact Us)
+        document.getElementById('navMember').addEventListener('click', (e) => {
+            e.preventDefault();
+            const message = document.documentElement.lang === 'en' ? 'Member page coming soon!' : '会员页面即将推出！';
+            showMessage(message);
+        });
+        document.getElementById('navContact').addEventListener('click', (e) => {
+            e.preventDefault();
+            const message = document.documentElement.lang === 'en' ? 'Contact Us page coming soon!' : '联系我们页面即将推出！';
+            showMessage(message);
+        });
+
+
+        /**
+         * Sets the language of the page.
+         * @param {string} lang - The language code ('en' for English, 'zh' for Chinese).
+         */
+        function setLanguage(lang) {
+            document.documentElement.lang = lang; // Set the HTML lang attribute
+
+            // Update all elements with data-en and data-zh attributes
+            document.querySelectorAll('[data-en], [data-zh]').forEach(element => {
+                if (lang === 'en' && element.dataset.en) {
+                    element.innerHTML = element.dataset.en;
+                } else if (lang === 'zh' && element.dataset.zh) {
+                    element.innerHTML = element.dataset.zh;
+                }
+            });
+
+            // Update placeholder texts
+            document.querySelectorAll('[data-en-placeholder], [data-zh-placeholder]').forEach(element => {
+                if (lang === 'en' && element.dataset.enPlaceholder) {
+                    element.placeholder = element.dataset.enPlaceholder;
+                } else if (lang === 'zh' && element.dataset.zhPlaceholder) {
+                    element.placeholder = element.dataset.zhPlaceholder;
+                }
+            });
+
+            // Update active language button styles
+            const langEnBtn = document.getElementById('langEnBtn');
+            const langZhBtn = document.getElementById('langZhBtn');
+
+            if (langEnBtn && langZhBtn) {
+                langEnBtn.classList.remove('active');
+                langZhBtn.classList.remove('active');
+                if (lang === 'en') {
+                    langEnBtn.classList.add('active');
+                } else {
+                    langZhBtn.classList.add('active');
+                }
+            }
+
+            // Re-render products if the products content is currently visible
+            if (!productsContent.classList.contains('hidden')) {
+                // Determine current category if any was selected
+                let currentCategory = null;
+                const activeSidebarLink = document.querySelector('.sidebar-link.active');
+                if (activeSidebarLink) {
+                    currentCategory = activeSidebarLink.dataset.category;
+                }
+                renderProducts(lang, currentCategory);
+            }
+        }
+
+        // Initial language setting (default to English)
+        setLanguage('en');
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Basic responsiveness check for console logging
+        function checkScreenSize() {
+            if (window.innerWidth < 640) {
+                console.log('Screen size: Small (Mobile)');
+            } else if (window.innerWidth < 1024) {
+                console.log('Screen size: Medium (Tablet)');
+            } else {
+                console.log('Screen size: Large (Desktop)');
+            }
+        }
+        window.addEventListener('resize', checkScreenSize);
+        checkScreenSize(); // Initial check
+
+        // Hero banner image cycling
+        const heroBanner = document.querySelector('.hero-banner');
+        const images = [
+            'images/Screensho_bigpicture.jpg', // Original image
+            'images/second_background.jpg', // First new image
+            'images/Third_background.jpg' // Second new image
+        ];
+        let currentIndex = 0;
+
+        function changeBackgroundImage() {
+            heroBanner.style.backgroundImage = `url('${images[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        // Set initial background image
+        changeBackgroundImage();
+        // Start cycling images every 2 seconds
+        setInterval(changeBackgroundImage, 2000);
+    </script>
+
+</body>
+</html>
